@@ -1,4 +1,6 @@
 {% extends 'main.html' %}
 {% block content %}
-    Bonjour, vous êtes sur votre profile
+    Bonjour {{ user.username }}, vous êtes sur votre profile
+    <br>
+    <a href="{% url 'login' %}">Accueil</a>
 {% endblock %}
