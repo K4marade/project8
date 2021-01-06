@@ -1,4 +1,11 @@
 .idea/
+__pycache__/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
 
 .DS_Store
 
