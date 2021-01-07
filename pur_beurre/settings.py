@@ -37,14 +37,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',
+    'home',
     'crispy_forms',
+    'django.contrib.admin',
+
 ]
 
 MIDDLEWARE = [
@@ -131,4 +133,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+# LOGIN_REDIRECT_URL = reverse_lazy('profile')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
