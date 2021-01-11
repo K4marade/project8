@@ -3,5 +3,5 @@ from django.db import models
 
 
 class UserAuth(AbstractUser):
-    pass
+    password2 = models.CharField(max_length=50, default=None)
 
