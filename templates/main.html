@@ -42,6 +42,7 @@
                         {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}?next={{request.path}}">
                                 <img src="{% static 'main/img/mon-compte-img.png' %}" alt="Mon-compte">
+                                {{ user.username }}
                             </a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'aliments' %}?next={{request.path}}">
                                 <img src="{% static 'main/img/carrot.png' %}" alt="Mes-aliments">
@@ -50,8 +51,8 @@
                                 <img src="{% static 'main/img/logout-img.png' %}" alt="Logout">
                             </a></li>
                         {% else %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'register'%}?next={{request.path}}">New Account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Connexion</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'register'%}?next={{request.path}}">Créer un compte</a></li>
                         {% endif %}
                     </ul>
                 </div>

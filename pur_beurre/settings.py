@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -42,9 +43,7 @@ INSTALLED_APPS = [
     'account',
     'home',
     'crispy_forms',
-    'django.contrib.admin',
-    'widget_tweaks'
-
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -100,9 +99,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS': {
-            'min_length': 4,
-        }
+        # 'OPTIONS': {
+        #     'min_length': 4,
+        # }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -130,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = reverse_lazy('home')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

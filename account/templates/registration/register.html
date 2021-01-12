@@ -38,32 +38,32 @@
 			<div class="login100-more" style="background-image: url('/static/main/img/bg-main.jpg');"></div>
 
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-				<form class="login100-form validate-form" method="POST" action="{% url 'home' %}">{% csrf_token %}
+				<form class="login100-form validate-form" method="POST" action="">{% csrf_token %}
 					<span class="login100-form-title p-b-59">
 						Inscription
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate="Username is required">
 						<span class="label-input100">Username</span>
-                        {% render_field form.username class="input100" name="username" placeholder="username"%}
+                        {% render_field form.username class="input100"  placeholder="username"%}
                         <span class="focus-input100"></span>
 					</div>
 
                     <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<span class="label-input100">Email</span>
-                        {% render_field form.email class="input100" name="email" placeholder="@" %}
+                        {% render_field form.email class="input100"  placeholder="@" %}
                         <span class="focus-input100"></span>
 					</div>
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Password</span>
-                        {% render_field form.password1 class="input100" name="pass" placeholder="******" %}
+                        {% render_field form.password1 class="input100"  placeholder="******" %}
                         <span class="focus-input100"></span>
 					</div>
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Repeat Password</span>
-                        {% render_field form.password2 class="input100" name="repeat-pass" placeholder="******" %}
+                        {% render_field form.password2 class="input100"  placeholder="******" %}
                         <span class="focus-input100"></span>
 					</div>
 
