@@ -3,8 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
 from .forms import RegisterForm
+from .decorators import unauthenticated_user
+from django.contrib.auth.views import LoginView
 
 
+@unauthenticated_user
 def register_view(request):
     if request.method == "GET":
         form = RegisterForm()
