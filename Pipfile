@@ -6,6 +6,11 @@ name = "pypi"
 [packages]
 django = "*"
 psycopg2-binary = "*"
+requests = "*"
+install = "*"
+pytest-django = "*"
+pytest-mock = "*"
+pytest = "*"
 
 [dev-packages]
 
