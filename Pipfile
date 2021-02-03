@@ -11,6 +11,7 @@ install = "*"
 pytest-django = "*"
 pytest-mock = "*"
 pytest = "*"
+mixer = "*"
 
 [dev-packages]
 

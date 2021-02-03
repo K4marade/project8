@@ -41,37 +41,37 @@ class TestCommands:
         assert self.d.get_categories(2) is None
         assert self.d.get_categories('gateaux') is None
 
-    def test_get_aliments(self, monkeypatch):
-        category = ['Category_1']
-        aliments = {'Category_1': [{'products': [{'product_name_fr': 'Ali_1'},
-                                                 {'product_name_fr': 'Ali_2'}]}]}
-
-        class MockRequestResponse:
-            status_code = 200
-
-            @staticmethod
-            def json():
-                aliment = [[i for i in aliments[x]] for x in aliments.keys()]
-                return {'products': [{'product_name_fr': ali} for ali in aliment]}
-
-                # return {
-                #     'products': [{'product_name_fr': ali} for x, ali in aliment]
-                # }
-
-        def mockreturn(*args, **kwargs):
-            return MockRequestResponse
-
-        monkeypatch.setattr('requests.get', mockreturn)
-
-        assert self.d.get_aliments(category) == aliments
-
-    def test_cleaned_data(self, monleypatch):
-        # aliments = ...
-        pass
-
-
-    def test_insert_data(self, monkeypatch):
-        pass
+    # def test_get_aliments(self, monkeypatch):
+    #     category = ['Category_1']
+    #     aliments = {'Category_1': [{'products': [{'product_name_fr': 'Ali_1'},
+    #                                              {'product_name_fr': 'Ali_2'}]}]}
+    #
+    #     class MockRequestResponse:
+    #         status_code = 200
+    #
+    #         @staticmethod
+    #         def json():
+    #             aliment = [[i for i in aliments[x]] for x in aliments.keys()]
+    #             return {'products': [{'product_name_fr': ali} for ali in aliment]}
+    #
+    #             # return {
+    #             #     'products': [{'product_name_fr': ali} for x, ali in aliment]
+    #             # }
+    #
+    #     def mockreturn(*args, **kwargs):
+    #         return MockRequestResponse
+    #
+    #     monkeypatch.setattr('requests.get', mockreturn)
+    #
+    #     assert self.d.get_aliments(category) == aliments
+    #
+    # def test_cleaned_data(self, monkeypatch):
+    #     # aliments = ...
+    #     pass
+    #
+    # @pytest.mark.django_db
+    # def test_insert_data(self, monkeypatch):
+    #     pass
 
     # def test_get_categories_with_error(self, monkeypatch):
     #     categories = []
