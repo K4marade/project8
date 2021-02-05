@@ -16,11 +16,11 @@
                 </div>
                 <div class="col-lg-8 align-self-baseline">
                     <h2 class="text-white-75 mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</h2>
-                    <form class="d-flex" id="main-search">
+                    <form class="d-flex" id="main-search" action="{% url 'search' %}" method="get">
                         <div class="input-group mb-3">
                             <input type="search" class="form-control" placeholder="Produit" aria-label="Produit" aria-describedby="button-addon2">
                             <div class="input-group-append">
-                                <button style="background: #DE9440" class="btn" type="button" id="button-addon2">Chercher</button>
+                                <button style="background: #DE9440" class="btn" type="submit" id="button-addon2">Chercher</button>
                             </div>
                         </div>
                     </form>
