@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-10 align-self-center">
+                    <h2 class="text-uppercase text-white font-weight-bold">
+                        Aliment cherché : {{ title }} <br>
+                        <img class="rounded mt-4 img-thumbnail" id="searched-img" src="{{ image }}" alt="product-image"/>
+                    </h2>
+                    <hr class="divider my-4" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-section">
+        <div class="container">
+            <div class="text-center text-capitalize" style="font-family: 'Open Sans', sans-serif; font-size: 40px; color: #f4623a">
+                Substituts possibles :
+            </div>
+            <div class="row">
+                {% for substitute in substitutes %}
+                    <div class="col-md-4 text-center mt-5 card" style="background-color: beige">
+
+                        <div class="row ml-3 mr-3 mt-2 img-thumbnail">
+                            <a href="{% url 'results' %}{{ substitute.id }}/" class="m-auto" title="chercher un substitut">
+                                <img class="rounded" src="{{ substitute.small_image }}" alt="product-image"/>
+                            </a>
+                        </div>
+
+                        <div class="row card-body">
+                            <a href="{% url 'results' %}{{ substitute.id }}/" class="m-auto" title="chercher un substitut">
+                                <h3 class="h4 mb-2 text-black">{{ substitute.name }}</h3>
+                            </a>
+                        </div>
+
+                        <span class="text-capitalize card-img-bottom">Nutriscore : {{ substitute.nutriscore }}</span>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

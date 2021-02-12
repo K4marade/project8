@@ -9,6 +9,7 @@ class Product(models.Model):
     name = models.CharField(max_length=250)
     nutriscore = models.CharField(max_length=1)
     image = models.URLField()
+    small_image = models.URLField()
     url = models.URLField()
 
     def __str__(self):
@@ -21,3 +22,14 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Favorite(models.Model):
+    ali_source = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ali_source')
+    ali_sub = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ali_sub')
+
+    class Meta:
+        unique_together = ('ali_source', 'ali_sub')
+
+    def __str__(self):
+        return "{} {}".format(self.ali_source, self.ali_sub)
