@@ -35,9 +35,6 @@ def profile_view(request):
     return render(request, 'account/profile.html')
 
 
-@login_required
-def favorite_view(request):
-    return render(request, 'account/favorite.html')
 
 
 @login_required
