@@ -37,8 +37,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         <li class="nav-item">
-                            <form class="form-inline">
-                                <input class="form-control form-control-sm  mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher" style="background: lightgrey">
+                            <form class="form-inline" action="{% url 'search' %}" method="get">
+                                <input class="form-control form-control-sm  mr-sm-2" type="search" name="search" placeholder="Chercher" aria-label="Chercher" style="background: lightgrey">
                             </form>
                         </li>
                         {% if user.is_authenticated %}

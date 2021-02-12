@@ -36,5 +36,10 @@ def profile_view(request):
 
 
 @login_required
-def aliments_view(request):
-    return render(request, 'account/aliments.html')
+def favorite_view(request):
+    return render(request, 'account/favorite.html')
+
+
+@login_required
+def favorite_view(request, product_id, sub_id):
+    pass
