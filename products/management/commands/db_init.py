@@ -180,9 +180,9 @@ class Command(BaseCommand):
                     #######################################
                     ### If you wish to refresh OFF data ###
                     #######################################
-                    self.stdout.write(self.style.WARNING("Refreshing data, please wait..."))
-                    db.refresh_data()
-                    self.stdout.write(self.style.SUCCESS("Data refreshed"))
+                    # self.stdout.write(self.style.WARNING("Refreshing data, please wait..."))
+                    # db.refresh_data()
+                    # self.stdout.write(self.style.SUCCESS("Data refreshed"))
 
                     self.stdout.write(self.style.WARNING("Inserting data into DB..."))
                     db.insert_data()

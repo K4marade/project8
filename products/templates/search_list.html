@@ -1,13 +1,16 @@
 {% extends 'main.html' %}
 {% load static %}
 
+{% block addcss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'products/css/results.css' %}">
+{% endblock %}
+
 {% block content %}
     <!-- Masthead-->
-{#    <header class="prod-bg" style="background-image: {{  }}" >#}
-    <header class="masthead">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-10 align-self-center">
+    <header class="header-searched">
+        <div class="container">
+            <div class="row h-100 justify-content-center text-center">
+                <div class="col-lg-10 align-self-center searched-bloc">
                     <h1 class="text-uppercase text-white font-weight-bold">
                         {% if products.count == 0 %}
                             0 résultats trouvés
@@ -21,32 +24,25 @@
         </div>
     </header>
 
-{#    {% for category in categories %}#}
-{#        <div class="container text-center">#}
-{#             {{ category.products.name }}#}
-{##}
-{#        </div>#}
-{#    {% endfor %}#}
-
-    <section class="page-section">
+    <section class="body-section">
         <div class="container">
             <div class="row">
                 {% for product in products %}
-                    <div class="col-md-4 text-center mt-5 card" style="background-color: beige">
+                    <div class="col-md-3 text-center mx-2 mt-5 card">
 
-                        <div class="row ml-3 mr-3 mt-2 img-thumbnail">
-                            <a href="{% url 'results' %}{{ product.id }}/" class="m-auto" title="chercher un substitut">
+                        <div class="row mx-auto mt-2 img-list">
+                            <a href="{% url 'results' product.id %}" class="m-auto" title="chercher un substitut">
                                 <img class="rounded" src="{{ product.small_image }}" alt="product-image"/>
                             </a>
                         </div>
 
                         <div class="row card-body">
-                            <a href="{% url 'results' %}{{ product.id }}/" class="m-auto" title="chercher un substitut">
-                                <h3 class="h4 mb-2 text-black">{{ product.name }}</h3>
+                            <a href="{% url 'results' product.id %}" class="m-auto" title="chercher un substitut">
+                                <h3 class="h4 mb-2 prod-text">{{ product.name }}</h3>
                             </a>
                         </div>
 
-                        <span class="text-capitalize card-img-bottom h4 mb-2 text-black">Catégorie : {{ product.categories.get }}</span>
+                        <span class="text-capitalize card-body h5 mb-2 text-black">Catégorie : {{ product.categories.get }}</span>
                         <span class="text-capitalize card-img-bottom">Nutriscore : {{ product.nutriscore }}</span>
 
                     </div>

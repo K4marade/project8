@@ -1,10 +1,9 @@
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, Http404
-from django.views.generic.list import ListView
-from django.views.generic.base import TemplateResponseMixin
-from products.models import Product, Category
-from django.core.paginator import Paginator
+from django.shortcuts import render, redirect
+from products.models import Product, Favorite
+from django.contrib.auth.decorators import login_required
+from account.models import UserAuth
+from django.db import IntegrityError
 
 
 def search_list_view(request):
@@ -18,12 +17,8 @@ def search_list_view(request):
 
     elif search:
         # try:
-        products = Product.objects.filter(name__icontains=search).distinct('categories')
-        context = {
-            "products": products,
-        }
-
-        return render(request, 'search_list.html', context)
+        products = Product.objects.filter(name__icontains=search).distinct()
+        return render(request, 'search_list.html', locals())
 
         # except Product.DoesNotExist:
         # raise Http404("Le produit n'a pas été trouvé")
@@ -34,13 +29,25 @@ def search_list_view(request):
 def results_view(request, product_id):
     title = Product.objects.get(id=product_id).name
     image = Product.objects.get(id=product_id).small_image
-    substitutes = Product.objects.filter(categories__products__id=product_id).order_by('nutriscore').exclude('')
+    substitutes = Product.objects.filter(categories__products__id=product_id).order_by('nutriscore').exclude(
+        id=product_id)
+    return render(request, 'results.html', locals())
 
-    context = {
-        "title": title,
-        "image": image,
-        "substitutes": substitutes
 
-    }
+def save_product_view(request, product_id, substitute_id):
+    # id_user = request.session['_auth_user_id']
+    if request.user.is_authenticated:
+        current_user = UserAuth.objects.get(id=request.session['_auth_user_id'])
+        product = Product.objects.get(id=product_id).id
+        substitute = Product.objects.get(id=substitute_id).id
+        try:
+            Favorite.objects.create(user_id=current_user, ali_source_id=product, ali_sub_id=substitute)
+            messages.success(request, 'Le produit a bien été sauvegardé')
+            return redirect('results', product)
+        except IntegrityError:
+            messages.error(request, 'Ce substitut a déjà été sauvegardé')
+            return redirect('results', product)
+    else:
+        messages.warning(request, "Connectez-vous pour sauvegarder un produit")
+        return redirect('login')
 
-    return render(request, 'results.html', context)

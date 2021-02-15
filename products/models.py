@@ -1,4 +1,7 @@
+from account.models import UserAuth
 from django.db import models
+from django.conf import settings
+
 
 
 # Create your models here.
@@ -25,6 +28,7 @@ class Category(models.Model):
 
 
 class Favorite(models.Model):
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ali_source = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ali_source')
     ali_sub = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ali_sub')
 
@@ -32,4 +36,4 @@ class Favorite(models.Model):
         unique_together = ('ali_source', 'ali_sub')
 
     def __str__(self):
-        return "{} {}".format(self.ali_source, self.ali_sub)
+        return "{} {} {}".format(self.user_id, self.ali_source, self.ali_sub)
