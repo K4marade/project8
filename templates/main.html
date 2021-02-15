@@ -22,6 +22,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles.css' %}">
         {% block addcss %}
         {% endblock %}
+
     </head>
 
     <body id="page-top">
@@ -48,8 +49,8 @@
                                 </svg>
 {#                                {{ user.username }}#}
                             </a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'aliments' %}?next={{request.path}}" title="Mes Aliments">
-                                <img src="{% static 'main/img/Carrot.svg' %}" height="33px" alt="Mes-aliments">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'favorite' %}?next={{request.path}}" title="Mes favoris">
+                                <img src="{% static 'main/img/Carrot.svg' %}" height="33px" alt="Mes favoris">
                             </a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}?next={{request.path}}" title="Déconnexion">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#C45525" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -95,5 +96,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
         <!-- Core theme JS-->
         <script src="{% static 'main/js/scripts.js' %}"></script>
+        {% block addjs %}
+        {% endblock %}
     </body>
 </html>

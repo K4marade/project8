@@ -1,129 +1,3 @@
-{#{% load static %}#}
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Pur Beurre</title>#}
-{#</head>#}
-{#<body>#}
-{#    {% if form.errors %}#}
-{#        <p>Your username and password didn't match. Please try again.</p>#}
-{#    {% endif %}#}
-{##}
-{#    {% if next %}#}
-{#        {% if user.is_authenticated %}#}
-{#            <p>Your account doesn't have access to this page. To proceed,#}
-{#            please login with an account that has access.</p>#}
-{#        {% else %}#}
-{#            <p>Please login to see this page.</p>#}
-{#        {% endif %}#}
-{#    {% endif %}#}
-{##}
-{#    <form method="post" action="{% url 'login' %}">#}
-{#        {% csrf_token %}#}
-{#        <table>#}
-{#            <tr>#}
-{#                <td>{{ form.username.label_tag }}</td>#}
-{#                <td>{{ form.username }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <td>{{ form.password.label_tag }}</td>#}
-{#                <td>{{ form.password }}</td>#}
-{#            </tr>#}
-{#        </table>#}
-{#        <input type="submit" value="login" />#}
-{#        <input type="hidden" name="next" value="{{ next }}" />#}
-{#    </form>#}
-{##}
-  {# Assumes you setup the password_reset view in your URLconf #}
-{#  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>#}
-{##}
-{#</body>#}
-{#</html>#}
-
-{#{% extends 'main.html' %}#}
-{#{% block content %}#}
-{#    <form action="{% url 'register' %}" method="post">#}
-{#    {% csrf_token %}#}
-{#    {{ form }}#}
-{#    <input type="submit">#}
-{#    </form>#}
-{#{% endblock %}#}
-{##}
-{##}
-{#{% block content %}#}
-{#    <h2>Sign up</h2>#}
-{#    <form method="post">#}
-{#        {% csrf_token %}#}
-{#        {% for field in form %}#}
-{#            {{ field.label_tag }}<br>#}
-{#            {{ field }}#}
-{#            {% if field.help_text %}#}
-{#                <small style="color: grey">{{ field.help_text }}</small>#}
-{#            {% endif %}#}
-{#            {% for error in field.errors %}#}
-{#                <p style="color: red">{{ error }}</p>#}
-{#            {% endfor %}#}
-{#        {% endfor %}#}
-{#        <button type="submit">Sign up</button>#}
-{#    </form>#}
-{#{% endblock %}#}
-{##}
-{#<!--#}
-{#Author: Colorlib#}
-{#Author URL: https://colorlib.com#}
-{#License: Creative Commons Attribution 3.0 Unported#}
-{#License URL: http://creativecommons.org/licenses/by/3.0/#}
-{#-->#}
-{#{% load static %}#}
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#<head>#}
-{#<title>Inscription Pur Beurre</title>#}
-{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
-{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
-{#<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>#}
-{#<!-- Custom Theme files -->#}
-{#<link href="{% static 'css/register.css' %}" rel="stylesheet" type="text/css" media="all" />#}
-{#<!-- //Custom Theme files -->#}
-{#<!-- web font -->#}
-{#<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">#}
-{#<!-- //web font -->#}
-{#</head>#}
-{#<body>#}
-{#	<!-- main -->#}
-{#	<div class="main-w3layouts wrapper">#}
-{#		<h1>Inscription</h1>#}
-{#		<div class="main-agileinfo">#}
-{#			<div class="agileits-top">#}
-{#				<form action="#" method="post">#}
-{#					{% csrf_token %}#}
-{#                    {% for field in form %}#}
-{#                        {{ field.label_tag }}<br>#}
-{#                        {{ field }}#}
-{#                        {% if field.help_text %}#}
-{#                            <small style="color: grey">{{ field.help_text }}</small>#}
-{#                        {% endif %}#}
-{#                        {% for error in field.errors %}#}
-{#                            <p style="color: red">{{ error }}</p>#}
-{#                        {% endfor %}#}
-{#                    {% endfor %}#}
-{#					<input type="submit" value="SIGNUP">#}
-{#				</form>#}
-{#				<p>Don't have an Account? <a href="{% url 'login' %}"> Login Now!</a></p>#}
-{#			</div>#}
-{#		</div>#}
-{#		<!-- copyright -->#}
-{#		<div class="colorlibcopy-agile">#}
-{#			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>#}
-{#		</div>#}
-{#		<!-- //copyright -->#}
-{##}
-{#	</div>#}
-{#	<!-- //main -->#}
-{#</body>#}
-{#</html>#}
-
 {% load static %}
 {% load widget_tweaks %}
 <!DOCTYPE html>
@@ -165,6 +39,16 @@
 
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
 				<form class="login100-form validate-form" method="POST" action="">{% csrf_token %}
+                    <div class="text-uppercase text-white font-weight-bold">
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                                <strong>{{ message }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
 					<span class="login100-form-title p-b-59">
 						Connexion
 					</span>

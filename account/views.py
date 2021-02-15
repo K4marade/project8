@@ -20,6 +20,7 @@ def register_view(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            messages.success(request, "Bonjour " + username + " !")
             return redirect('home')
 
     return render(request, 'registration/register.html', locals())
@@ -27,13 +28,13 @@ def register_view(request):
 
 def logout_view(request):
     logout(request)
+    messages.info(request, "Vous êtes bien déconnecté")
     return redirect('home')
 
 
 @login_required
 def profile_view(request):
     return render(request, 'account/profile.html')
-
 
 
 

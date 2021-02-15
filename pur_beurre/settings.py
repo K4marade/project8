@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+from django.contrib import messages
+from django.contrib.messages import constants as message_constants
 from django.urls import reverse_lazy
 
 from keys import DEV_SECRET_KEY
@@ -135,3 +137,12 @@ LOGIN_REDIRECT_URL = reverse_lazy('home')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'account.UserAuth'
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
+
