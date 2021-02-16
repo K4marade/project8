@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7c997881dc10138840f910f7e51cf9c08a5c805505370075af7b6f1af72df42d"
+            "sha256": "b21754d72f415155ebaca22dd0606fb4c6d88e8e47691d2dd36e1a0ac5ee4650"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -57,11 +57,18 @@
         },
         "faker": {
             "hashes": [
-                "sha256:0783729c61501d52efea2967aff6e6fcb8370f0f6b5a558f2a81233642ae529a",
-                "sha256:6b2995ffff6c2b02bc5daad96f8c24c021e5bd491d9d53d31bcbd66f348181d4"
+                "sha256:bf2a9b3f8d00a5dada61fc4a3f80fe0d6795c7f02a138a7d2ef2db5817c7d017",
+                "sha256:d4aecdb877519d06c2fdc01ffc5ecf70658981acf5e13cd07ded9892994ef5c6"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==5.8.0"
+            "version": "==6.1.1"
+        },
+        "fontawesome-free": {
+            "hashes": [
+                "sha256:e910e6a9fb98987a66982f80de6673c06255498f6473038c3b139f7962bb6317"
+            ],
+            "index": "pypi",
+            "version": "==5.15.2"
         },
         "idna": {
             "hashes": [

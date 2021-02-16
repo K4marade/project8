@@ -12,6 +12,7 @@ pytest-django = "*"
 pytest-mock = "*"
 pytest = "*"
 mixer = "*"
+fontawesome-free = "*"
 
 [dev-packages]
 

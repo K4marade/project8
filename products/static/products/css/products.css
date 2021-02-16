@@ -1,0 +1,131 @@
+.header-pb{
+    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.4) 0%, rgba(92, 77, 66, 0.4) 100%), url("../img/searched-prod-bg.jpg");
+
+    /*background: url("../img/searched-prod-bg.jpg");*/
+    /*opacity: 0.9;*/
+    background-size: cover;
+}
+
+.searched-block{
+    padding-top: 8rem;
+    padding-bottom: calc(6rem - 4.5rem);
+}
+
+.searched-img   {
+    padding: 0.30rem;
+    background-color: #345A61;
+    border: 4px solid;
+    border-radius: 0.40rem;
+    max-width: 100%;
+    height: auto;
+}
+
+.body-section{
+    padding: 1rem 0;
+    /*background: linear-gradient(to left, rgba(196, 85, 37, 0.8) 0%, rgba(222, 148, 64, 0.8) 100%) ;*/
+}
+
+
+
+.category{
+    font-family: "Scope One", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    position: relative;
+    bottom: 1rem;
+}
+
+.img-list{
+    padding: 0.50rem;
+    background-color: #ffffff;
+    border: 2px solid #C45525;
+    border-radius: 0.40rem;
+    max-width: max-content;
+    height: auto;
+}
+
+.sub-text{
+    font-family: "Scope One", serif;
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.prod-text{
+    font-family: "Scope One", serif;
+}
+
+.prod-card{
+    padding: 0.30rem;
+    background-color: rgba(196, 85, 37, 0.1);
+    border: 3px solid #C45525;
+    border-radius: 10%;
+    width: 25rem;
+    height: auto;
+    /*display: flex;*/
+
+}
+
+        /*.card {*/
+        /*    height: 100%;*/
+        /*    display: flex;*/
+        /*}*/
+
+        /*.card-block {*/
+        /*    display: flex;*/
+        /*    justify-content: space-between;*/
+        /*    flex-direction: column;*/
+        /*}*/
+
+        /*.card.card-footer {*/
+        /*    align-self: flex-end;*/
+        /*    flex: 1 1 auto;*/
+        /*}*/
+
+.nutriscore{
+    border: 2px #345A61 solid;
+    border-radius: 50%;
+    font-size: 2rem;
+    height: 3.5rem;
+    width: 3.5rem;
+    bottom: 90%;
+    left: 90%;
+    position: absolute;
+    font-family: "Open Sans", sans-serif;
+    color: white;
+    font-weight: 400}
+
+.nutri-a{
+    background-color: rgb(0, 138, 75)
+}
+
+.nutri-b{
+    background-color: rgb(128, 195, 64)
+}
+
+.nutri-c{
+    background-color: rgb(255, 200, 3);
+}
+
+.nutri-d{
+        background-color: rgb(245, 130, 30);
+}
+
+.nutri-e{
+        background-color: rgb(239, 65, 35 );
+}
+
+.save-btn{
+    justify-content: center;
+    position: relative;
+}
+
+.pb-text{
+    text-align: center;
+    font-family: "Scope One", sans-serif;
+    font-size: 2rem ;
+    margin-top: 3%;
+}
+
+.container-big{
+    margin-bottom: 19%;
+}

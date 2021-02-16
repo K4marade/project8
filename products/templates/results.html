@@ -3,16 +3,16 @@
 
 
 {% block addcss %}
-    <link rel="stylesheet" type="text/css" href="{% static 'products/css/results.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
 {% block content %}
 
     <!-- Header-->
-    <header class="header-searched">
+    <header class="header-pb">
         <div class="container">
             <div class="row h-100 justify-content-center text-center">
-                <div class="col-lg-10 align-self-center searched-bloc">
+                <div class="col-lg-10 align-self-center searched-block">
                     <span class="text-uppercase text-white font-weight-bold">
                         {% for message in messages %}
                             <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
@@ -37,23 +37,30 @@
     <section class="body-section">
         <div class="container">
             <div class="text-center text-uppercase pt-1 sub-text" >
-                Substituts possibles :
+                Vous pouvez remplacer cet aliment par :
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
                 {% for substitute in substitutes %}
-                    <div class="col-md-3 text-center mx-3 mt-5 card">
+                    <div class="col-md-3 text-center mx-4 mt-3 mb-5 prod-card">
 
+                        <div class="nutriscore nutri-{{ substitute.nutriscore }} text-uppercase mx-auto my-auto ">
+                            {{ substitute.nutriscore }}
+                        </div>
                         <div class="row mx-auto mt-2 img-list">
                             <img class="rounded" src="{{ substitute.small_image }}" alt="product-image"/>
                         </div>
 
                         <div class="row card-body">
-                            <h3 class="h4 mb-2 prod-text">{{ substitute.name }}</h3>
+                            <h3 class="h4 mb-2 prod-text m-auto">{{ substitute.name }}</h3>
                         </div>
 
-                        <span class="text-capitalize card-img-bottom">Nutriscore : {{ substitute.nutriscore }}</span>
 
-                        <div class="row align-self-center">
+{#                        <div class="save-btn row">#}
+{#                            <a href="{% url 'save' product_id substitute.id %}">#}
+{#                                <button type="button" class="-floppy-o btn btn-primary btn-lg btn-block">Sauvegarder</button>#}
+{#                            </a>#}
+{#                        </div>#}
+                        <div class="row card-body justify-content-center">
                             <a href="{% url 'save' product_id substitute.id %}">
                                 <button type="button" class="btn btn-primary btn-lg btn-block">Sauvegarder</button>
                             </a>

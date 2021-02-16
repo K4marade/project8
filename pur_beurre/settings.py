@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     'account',
     'home',
     'products',
-    'crispy_forms',
     'widget_tweaks',
+    'fontawesome-free',
+
 ]
 
 MIDDLEWARE = [
