@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
 from .forms import RegisterForm
 from .decorators import unauthenticated_user
+from products.models import Favorite, Product
+from account.models import UserAuth
 from django.contrib.auth.views import LoginView
 
 
@@ -34,10 +36,12 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'account/profile.html')
-
+    return render(request, 'account/profile.html', locals())
 
 
 @login_required
-def favorite_view(request, product_id, sub_id):
-    pass
+def favorite_view(request):
+    current_user = UserAuth.objects.get(id=request.session['_auth_user_id'])
+    # products = Product.objects.filter(id=Favorite.objects.filter(id=current_user))
+    substitutes = Favorite.objects.filter(user_id=current_user)
+    return render(request, 'account/favorite.html', {'substitutes': substitutes})
