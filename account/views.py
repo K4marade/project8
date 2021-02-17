@@ -4,9 +4,10 @@ from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
 from .forms import RegisterForm
 from .decorators import unauthenticated_user
-from products.models import Favorite, Product
+from products.models import Product
 from account.models import UserAuth
 from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 @unauthenticated_user
@@ -28,6 +29,12 @@ def register_view(request):
     return render(request, 'registration/register.html', locals())
 
 
+# @unauthenticated_user
+# class MyLoginView(SuccessMessageMixin, LoginView):
+#     template_name = 'registration/login.html'
+#     success_message = 'Welcome to your profile'
+
+
 def logout_view(request):
     logout(request)
     messages.info(request, "Vous êtes bien déconnecté")
@@ -43,5 +50,5 @@ def profile_view(request):
 def favorite_view(request):
     current_user = UserAuth.objects.get(id=request.session['_auth_user_id'])
     # products = Product.objects.filter(id=Favorite.objects.filter(id=current_user))
-    substitutes = Favorite.objects.filter(user_id=current_user)
-    return render(request, 'account/favorite.html', {'substitutes': substitutes})
+    favorites = Product.objects.filter(ali_sub__user_id=current_user)
+    return render(request, 'account/favorite.html', {'favorites': favorites})

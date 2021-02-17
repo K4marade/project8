@@ -25,9 +25,9 @@
                     </span>
                     <h2 class="text-uppercase text-white font-weight-bold">
 
-                        Aliment cherché : {{ title }}
+                        Aliment cherché : {{ prod_title }}
                         <hr class="divider my-4" />
-                        <img class="searched-img rounded" src="{{ image }}" alt="product-image"/>
+                        <img class="searched-img rounded" src="{{ prod_image }}" alt="product-image"/>
                     </h2>
                 </div>
             </div>
@@ -36,17 +36,17 @@
 
     <section class="body-section">
         <div class="container">
-            <div class="text-center text-uppercase pt-1 sub-text" >
+            <div class="text-center text-uppercase pt-1 sub-text">
                 Vous pouvez remplacer cet aliment par :
             </div>
             <div class="row justify-content-center">
                 {% for substitute in substitutes %}
                     <div class="col-md-3 text-center mx-4 mt-3 mb-5 prod-card">
 
-                        <div class="nutriscore nutri-{{ substitute.nutriscore }} text-uppercase mx-auto my-auto ">
+                        <div class="nutriscore nutri-{{ substitute.nutriscore }} text-uppercase m-auto ">
                             {{ substitute.nutriscore }}
                         </div>
-                        <div class="row mx-auto mt-2 img-list">
+                        <div class="row mx-auto mt-4 img-list">
                             <img class="rounded" src="{{ substitute.small_image }}" alt="product-image"/>
                         </div>
 
@@ -60,9 +60,9 @@
 {#                                <button type="button" class="-floppy-o btn btn-primary btn-lg btn-block">Sauvegarder</button>#}
 {#                            </a>#}
 {#                        </div>#}
-                        <div class="row card-body justify-content-center">
+                        <div class="row pb-btn mx-auto">
                             <a href="{% url 'save' product_id substitute.id %}">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Sauvegarder</button>
+                                <button type="button" class="flopp h4 btn-primary btn-lg">Sauvegarder</button>
                             </a>
                         </div>
 

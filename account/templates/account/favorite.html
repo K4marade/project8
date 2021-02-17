@@ -1,16 +1,20 @@
 {% extends 'main.html' %}
 {% load static %}
 
+{% block addcss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'products/css/products.css' %}">
+{% endblock %}
+
 {% block content %}
     <!-- Masthead-->
     <header class="masthead">
         <div class="container h-100">
             <div class="row h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-10 align-self-center">
-                    {% if substitutes.count == 0 %}
+                    {% if favorites.count == 0 %}
                         <h2 class="text-uppercase text-white font-weight-bold">Vous n'avez aucun produit sauvegardé.</h2>
                     {% else %}
-                        <h2 class="text-uppercase text-white font-weight-bold">Voici vos {{ substitutes.count }} produits favoris</h2>
+                        <h2 class="text-uppercase text-white font-weight-bold">Voici vos {{ favorites.count }} produits favoris</h2>
                     {% endif %}
                     <hr class="divider my-4" />
                 </div>
@@ -20,30 +24,29 @@
 
     <section class="body-section">
         <div class="container">
-{#            <div class="text-center text-uppercase pt-1 sub-text" >#}
-{#                Substituts possibles :#}
-{#            </div>#}
-
-            <div class="row">
-                {% for substitute in substitutes %}
-                    <div class="col-md-3 text-center mx-3 mt-5 card">
-                        <div class="nutriscore">{{ substitute.nutriscore }}</div>
-
-                        <div class="row mx-auto mt-2 img-list">
-                            <img class="rounded" src="{{ substitute }}" alt="product-image"/>
+            <div class="row justify-content-center">
+                {% for favorite in favorites %}
+                    <div class="col-md-3 text-center mx-4 mt-3 mb-5 prod-card">
+                        <div class="row card-container-top align-items-center">
+                            <div class="nutriscore nutri-{{ favorite.nutriscore }} text-uppercase m-auto ">
+                                {{ favorite.nutriscore }}
+                            </div>
+                            <div class="row align-items-start mx-auto mt-4 img-border">
+                                <a href="{% url 'detail' favorite.id %}">
+                                    <img class="rounded prod-img" src="{{ favorite.small_image }}" alt="product-image"/>
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="row card-body">
-                            <h3 class="h4 mb-2 prod-text">{{ substitute.name }}</h3>
+                        <div class="row mt-5 card-container-center align-items-center">
+                            <h5 class="prod-text mx-auto">{{ favorite.name }}</h5>
                         </div>
 
-                        <span class="text-capitalize card-img-bottom">Nutriscore : {{ substitute.nutriscore }}</span>
-
-{#                        <div class="row align-self-center">#}
-{#                            <a href="{% url 'save' product_id substitute.id %}">#}
-{#                                <button type="button" class="btn btn-primary btn-lg btn-block">Sauvegarder</button>#}
-{#                            </a>#}
-{#                        </div>#}
+                        <div class="container mt-3">
+                            <a class="btn btn-info btn-block" href="{% url 'detail' favorite.id %}" title="détail">
+                                Informations produit
+                            </a>
+                        </div>
 
                     </div>
                 {% endfor %}

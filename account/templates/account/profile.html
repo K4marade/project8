@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block content %}
-    <header class="header-pb">
+    <header class="pb-header">
         <div class="container">
             <div class="row h-100 justify-content-center text-center">
                 <div class="col-lg-10 align-self-center searched-block">
                     <h2 class="text-white font-weight-bold">
-                        Bonjour <br> {{ user.get_username }} !
+                        Bonjour {{ user.get_username }} !
                         <hr class="divider my-4" />
                     </h2>
                 </div>
