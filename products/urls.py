@@ -7,4 +7,6 @@ urlpatterns = [
     path('results/<int:product_id>/', views.results_view, name='results'),
     path('save/', views.save_product_view, name='save'),
     path('save/<int:product_id>/<int:substitute_id>', views.save_product_view, name='save'),
+    path('detail', views.detail_view, name='detail'),
+    path('detail/<int:product_id>', views.detail_view, name='detail'),
 ]
