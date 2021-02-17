@@ -123,7 +123,8 @@ class Database:
                              "url",
                              "image_url",
                              "image_small_url",
-                             "url"]
+                             "url",
+                             "image_nutrition_url"]
                 if not all(tag in products for tag in valid_tag):
                     pass
                 else:
@@ -133,7 +134,8 @@ class Database:
                                 products['nutriscore_grade'],
                                 products['image_url'],
                                 products['image_small_url'],
-                                products['url']]
+                                products['url'],
+                                products['image_nutrition_url']]
                         lst_data.append(data)
             return lst_data
 
@@ -160,7 +162,8 @@ class Database:
                                              nutriscore=data[2],
                                              image=data[3],
                                              small_image=data[4],
-                                             url=data[5])
+                                             url=data[5],
+                                             nutrition_img=data[6])
 
 
 class Command(BaseCommand):
@@ -180,9 +183,9 @@ class Command(BaseCommand):
                     #######################################
                     ### If you wish to refresh OFF data ###
                     #######################################
-                    # self.stdout.write(self.style.WARNING("Refreshing data, please wait..."))
-                    # db.refresh_data()
-                    # self.stdout.write(self.style.SUCCESS("Data refreshed"))
+                    self.stdout.write(self.style.WARNING("Refreshing data, please wait..."))
+                    db.refresh_data()
+                    self.stdout.write(self.style.SUCCESS("Data refreshed"))
 
                     self.stdout.write(self.style.WARNING("Inserting data into DB..."))
                     db.insert_data()

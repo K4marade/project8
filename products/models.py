@@ -14,6 +14,7 @@ class Product(models.Model):
     image = models.URLField()
     small_image = models.URLField()
     url = models.URLField()
+    nutrition_img = models.URLField(blank=True)
 
     def __str__(self):
         return self.name
