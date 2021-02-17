@@ -1,8 +1,6 @@
-.header-pb{
-    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.4) 0%, rgba(92, 77, 66, 0.4) 100%), url("../img/searched-prod-bg.jpg");
-
-    /*background: url("../img/searched-prod-bg.jpg");*/
-    /*opacity: 0.9;*/
+.pb-header{
+    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.4) 0%, rgba(92, 77, 66, 0.4) 100%),
+    url("../img/searched-prod-bg.jpg");
     background-size: cover;
 }
 
@@ -22,7 +20,6 @@
 
 .body-section{
     padding: 1rem 0;
-    /*background: linear-gradient(to left, rgba(196, 85, 37, 0.8) 0%, rgba(222, 148, 64, 0.8) 100%) ;*/
 }
 
 
@@ -30,12 +27,10 @@
 .category{
     font-family: "Scope One", sans-serif;
     font-size: 1rem;
-    font-weight: 400;
-    position: relative;
-    bottom: 1rem;
+    font-weight: bold;
 }
 
-.img-list{
+.img-border{
     padding: 0.50rem;
     background-color: #ffffff;
     border: 2px solid #C45525;
@@ -47,7 +42,7 @@
 .sub-text{
     font-family: "Scope One", serif;
     font-size: 30px;
-    color: #ffffff;
+    color: orangered;
 }
 
 .prod-text{
@@ -55,31 +50,12 @@
 }
 
 .prod-card{
-    padding: 0.30rem;
     background-color: rgba(196, 85, 37, 0.1);
     border: 3px solid #C45525;
     border-radius: 10%;
     width: 25rem;
-    height: auto;
-    /*display: flex;*/
-
+    height: 25rem;
 }
-
-        /*.card {*/
-        /*    height: 100%;*/
-        /*    display: flex;*/
-        /*}*/
-
-        /*.card-block {*/
-        /*    display: flex;*/
-        /*    justify-content: space-between;*/
-        /*    flex-direction: column;*/
-        /*}*/
-
-        /*.card.card-footer {*/
-        /*    align-self: flex-end;*/
-        /*    flex: 1 1 auto;*/
-        /*}*/
 
 .nutriscore{
     border: 2px #345A61 solid;
@@ -88,7 +64,7 @@
     height: 3.5rem;
     width: 3.5rem;
     bottom: 90%;
-    left: 90%;
+    left: 88%;
     position: absolute;
     font-family: "Open Sans", sans-serif;
     color: white;
@@ -128,4 +104,35 @@
 
 .container-big{
     margin-bottom: 19%;
+}
+
+.nutrition-img{
+    width: auto;
+    max-height: 200px;
+    border: 3px rgba(244, 97, 58, 0.8) solid;
+    border-radius: 5%;
+}
+
+.pb-btn{
+    color: #fff;
+    background: radial-gradient(circle, rgba(232,167,93,1) 0%, rgba(222,148,64,1) 50%, rgba(196,85,37,1) 100%);
+    border-color: #f4623a;
+}
+
+.prod-img{
+    max-height: 150px;
+    max-width: 200px;
+}
+
+.card-container-top{
+    height: 12rem;
+}
+
+.card-container-center{
+    height: 3rem;
+    margin-top: 1rem;
+}
+
+.card-container-end{
+    height: auto;
 }
