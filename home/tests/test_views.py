@@ -1,13 +1,18 @@
-from django.test import RequestFactory
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from home.views import *
 
 
-class TestViews:
+class TestViews(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(TestViews, cls).setUpClass()
+        cls.factory = RequestFactory()
 
     def test_home_view(self):
         path = reverse('home')
-        request = RequestFactory().get(path)
+        request = self.factory.get(path)
 
         response = home_view(request)
         assert response.status_code == 200

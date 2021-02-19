@@ -13,6 +13,7 @@ pytest-mock = "*"
 pytest = "*"
 mixer = "*"
 fontawesome-free = "*"
+pytest-cov = "*"
 
 [dev-packages]
 

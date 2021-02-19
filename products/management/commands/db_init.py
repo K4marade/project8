@@ -12,10 +12,6 @@ class Database:
     def __init__(self):
         pass
 
-    #####################################################
-    #### If you wish to work with locals json files ####
-    #####################################################
-
     @staticmethod
     def refresh_data():
         categories_data = requests.get(
@@ -43,70 +39,74 @@ class Database:
             f.write(str(ret_aliments.text))
             f.close()
 
-    @staticmethod
-    def get_categories(quantity):
-        """Method that gets categories from Open Food Facts' API"""
-        categories = []
-        with open(os.path.join(settings.BASE_DIR, "api_data_files/of_api_cat.json"), "r") as file:
-            file = file.read()
-
-        data = json.loads(file)
-        data = data['tags']
-        for category in data:
-            categories.append(category['name'])
-        return categories[:quantity]
-
-    @staticmethod
-    def get_aliments(category):
-        """Method that gets aliments from Open Food Facts' API"""
-        aliments = dict()
-        for cat in category:
-            aliments[cat] = []
-
-            with open(os.path.join(settings.BASE_DIR, "api_data_files/of_api_ali"
-                                                      + str(cat) + ".json")) as file:
-                file = file.read()
-            ret_aliments = json.loads(file)
-            aliments[cat].append(ret_aliments)
-        return aliments
-
     #####################################################
     #### If you wish to work with locals json files ####
     #####################################################
 
     # @staticmethod
     # def get_categories(quantity):
-    #     """Method that gets categories from Open Food Facts' API
-    #     and returns them into a list"""
+    #     """Method that gets categories from Open Food Facts' API"""
+    #     categories = []
+    #     with open(os.path.join(settings.BASE_DIR, "api_data_files/of_api_cat.json"), "r") as file:
+    #         file = file.read()
     #
-    #     get_data = requests.get("https://fr.openfoodfacts.org/categories.json")
-    #     if get_data.status_code == 200:
-    #         categories = []
-    #         data = (get_data.json()['tags'])
-    #         for category in data:
-    #             categories.append(category['name'])
-    #         return categories[:quantity]
+    #     data = json.loads(file)
+    #     data = data['tags']
+    #     for category in data:
+    #         categories.append(category['name'])
+    #     return categories[:quantity]
     #
     # @staticmethod
     # def get_aliments(category):
-    #     """Method that gets aliments from Open Food Facts' API
-    #     according to categories and returns them into a list"""
-    #
+    #     """Method that gets aliments from Open Food Facts' API"""
     #     aliments = dict()
     #     for cat in category:
     #         aliments[cat] = []
-    #         payload = {
-    #             "action": "process",
-    #             "tagtype_0": "categories",
-    #             "tag_contains_0": "contains",
-    #             "tag_0": str(cat),
-    #             "json": "true"
-    #         }
-    #         ret_aliments = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
-    #         if ret_aliments.status_code == 200:
-    #             ret_aliments = ret_aliments.json()
-    #             aliments[cat].append(ret_aliments)
+    #
+    #         with open(os.path.join(settings.BASE_DIR, "api_data_files/of_api_ali"
+    #                                                   + str(cat) + ".json")) as file:
+    #             file = file.read()
+    #         ret_aliments = json.loads(file)
+    #         aliments[cat].append(ret_aliments)
     #     return aliments
+
+    #####################################################
+    #### If you wish to work with locals json files ####
+    #####################################################
+
+    @staticmethod
+    def get_categories(quantity):
+        """Method that gets categories from Open Food Facts' API
+        and returns them into a list"""
+
+        get_data = requests.get("https://fr.openfoodfacts.org/categories.json")
+        if get_data.status_code == 200:
+            categories = []
+            data = (get_data.json()['tags'])
+            for category in data:
+                categories.append(category['name'])
+            return categories[:quantity]
+
+    @staticmethod
+    def get_aliments(category):
+        """Method that gets aliments from Open Food Facts' API
+        according to categories and returns them into a list"""
+
+        aliments = dict()
+        for cat in category:
+            aliments[cat] = []
+            payload = {
+                "action": "process",
+                "tagtype_0": "categories",
+                "tag_contains_0": "contains",
+                "tag_0": str(cat),
+                "json": "true"
+            }
+            ret_aliments = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
+            if ret_aliments.status_code == 200:
+                ret_aliments = ret_aliments.json()
+                aliments[cat].append(ret_aliments)
+        return aliments
 
     @staticmethod
     def cleaned_data(aliments):
@@ -183,9 +183,12 @@ class Command(BaseCommand):
                     #######################################
                     ### If you wish to refresh OFF data ###
                     #######################################
-                    self.stdout.write(self.style.WARNING("Refreshing data, please wait..."))
-                    db.refresh_data()
-                    self.stdout.write(self.style.SUCCESS("Data refreshed"))
+                    # self.stdout.write(self.style.WARNING("Refreshing data, please wait..."))
+                    # db.refresh_data()
+                    # self.stdout.write(self.style.SUCCESS("Data refreshed"))
+                    #######################################
+                    ### If you wish to refresh OFF data ###
+                    #######################################
 
                     self.stdout.write(self.style.WARNING("Inserting data into DB..."))
                     db.insert_data()
