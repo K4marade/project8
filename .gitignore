@@ -12,3 +12,7 @@ db.sqlite3-journal
 keys.py
 
 api_data_files/
+
+htmlcov/
+.coverage
+.coveragerc
