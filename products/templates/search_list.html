@@ -33,7 +33,7 @@
 
                 <div class="row justify-content-center">
                     {% for product in products %}
-                        <div class="col-md-3 text-center mx-4 mt-3 mb-5 prod-card ">
+                        <div class="col-md-6 col-lg-3 text-center mx-4 mt-3 mb-5 prod-card ">
                             <div class="row card-container-top align-items-center">
                                 <div class="nutriscore nutri-{{ product.nutriscore }} text-uppercase m-auto ">
                                     {{ product.nutriscore }}
@@ -47,7 +47,7 @@
                                     <h5 class="prod-text mt-2 mx-auto">{{ product.name }}</h5>
                             </div>
 
-                            <div class="container mt-5">
+                            <div class="container mt-3">
                                 <a class="btn btn-success btn-block" href="{% url 'results' product.id %}" title="substitut">
                                     Chercher un substitut
                                 </a>
@@ -56,7 +56,7 @@
                                 </a>
                             </div>
 
-                            <div class="container mt-1">
+                            <div class="container cat-border rounded my-2">
                                 <span class="category">Catégorie : {{ product.categories.get }}</span>
                             </div>
 
