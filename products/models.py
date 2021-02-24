@@ -34,7 +34,7 @@ class Favorite(models.Model):
     ali_sub = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ali_sub')
 
     class Meta:
-        unique_together = ('user_id', 'ali_source', 'ali_sub')
+        unique_together = ('user_id', 'ali_sub')
 
     def __str__(self):
         return "{} {} {}".format(self.user_id, self.ali_source, self.ali_sub)
