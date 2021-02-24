@@ -23,11 +23,17 @@
 }
 
 
+.cat-border{
+
+    background-color: rgba(232, 167, 93, 0.4);
+
+}
 
 .category{
     font-family: "Scope One", sans-serif;
     font-size: 1rem;
     font-weight: bold;
+    border-radius: 10%;
 }
 
 .img-border{
@@ -53,8 +59,9 @@
     background-color: rgba(196, 85, 37, 0.1);
     border: 3px solid #C45525;
     border-radius: 10%;
-    width: 25rem;
-    height: 27rem;
+    width: auto ;
+    height: auto;
+    min-height: 27rem;
 }
 
 .nutriscore{
@@ -115,8 +122,9 @@
 
 .pb-btn{
     color: #fff;
-    background: radial-gradient(circle, rgba(232,167,93,1) 0%, rgba(222,148,64,1) 50%, rgba(196,85,37,1) 100%);
-    border-color: #f4623a;
+    background: #f4623a;
+    /*background: radial-gradient(circle, rgba(232,167,93,1) 0%, rgba(222,148,64,1) 50%, rgba(196,85,37,1) 100%);*/
+    /*border-color: #f4623a;*/
 }
 
 .prod-img{
@@ -131,6 +139,7 @@
 .card-container-center{
     height: 3rem;
     margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
 .card-container-end{
