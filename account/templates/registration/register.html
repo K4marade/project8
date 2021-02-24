@@ -67,13 +67,6 @@
                         <span class="focus-input100"></span>
 					</div>
 
-{#                    {% if form.errors %}#}
-{#                       <div class="alert alert-warning">#}
-{#                           <a class="close" href="#" data-dismiss="alert">×</a>#}
-{#                           {{ form.error_messages }}#}
-{#                       </div>#}
-{#                    {% endif %}#}
-
                     {% if form.errors %}
                         {% for field in form %}
                             {% for error in field.errors %}
@@ -92,7 +85,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
+							<button id="button-validate" class="login100-form-btn">
 								Valider
 							</button>
 						</div>
