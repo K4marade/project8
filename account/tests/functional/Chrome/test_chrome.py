@@ -13,21 +13,17 @@ import time
 import pytest
 
 chrome_options = webdriver.ChromeOptions()
-
-
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--window-size=1920,1200")
 
 
 class ChromeFunctionalTestCase(StaticLiveServerTestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome()  # (options=chrome_options)
+        self.driver = webdriver.Chrome(options=chrome_options, )
         self.driver.maximize_window()
         self.user = get_user_model()
         self.client = Client()
-
-        # self.driver.implicitly_wait(10)
-        # self.wait = ui.WebDriverWait(self.driver, 5)
 
     def tearDown(self):
         self.driver.close()
