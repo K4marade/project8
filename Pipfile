@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 django = "*"
-psycopg2-binary = "*"
 requests = "*"
 install = "*"
 pytest-django = "*"
@@ -15,6 +14,12 @@ mixer = "*"
 fontawesome-free = "*"
 pytest-cov = "*"
 selenium = "*"
+gunicorn = "*"
+django-heroku = "*"
+django-environ = "*"
+setuptools = "==53.1.0"
+django-widget-tweaks = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
