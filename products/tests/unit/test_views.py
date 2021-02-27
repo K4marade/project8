@@ -24,7 +24,7 @@ class TestViews(TestCase):  # (TestCase)
         # response = self.c.get(reverse('search'))
 
         assert response_with_input.status_code == 200
-        # assert response_with_input.context ==
+        assert response_with_input.context['search'] == "nutella"
         assert response_without_input.status_code == 200
 
     def test_search_list_404(self):
