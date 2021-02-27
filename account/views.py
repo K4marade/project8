@@ -49,6 +49,5 @@ def profile_view(request):
 @login_required
 def favorite_view(request):
     current_user = UserAuth.objects.get(id=request.session['_auth_user_id'])
-    # products = Product.objects.filter(id=Favorite.objects.filter(id=current_user))
     favorites = Product.objects.filter(ali_sub__user_id=current_user)
     return render(request, 'account/favorite.html', {'favorites': favorites})
