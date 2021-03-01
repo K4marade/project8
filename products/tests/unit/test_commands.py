@@ -9,7 +9,7 @@ class TestCommands:
         self.d = Database()
 
     def test_get_categories(self, monkeypatch):
-        categories = ['Category_1', 'Category_2']
+        categories = ["Category_1", "Category_2"]
 
         class MockRequestResponse:
             status_code = 200
@@ -17,17 +17,17 @@ class TestCommands:
             @staticmethod
             def json():
                 return {
-                    'tags': [{'name': category} for category in categories]
+                    "tags": [{"name": category} for category in categories]
                 }
 
         def mockreturn(*args):
-            mockreturn.params = {'args': args}
+            mockreturn.params = {"args": args}
             return MockRequestResponse()
 
-        monkeypatch.setattr('requests.get', mockreturn)
+        monkeypatch.setattr("requests.get", mockreturn)
 
         assert self.d.get_categories(2) == categories
-        assert mockreturn.params['args'] == ("https://fr.openfoodfacts.org/categories.json",)
+        assert mockreturn.params["args"] == ("https://fr.openfoodfacts.org/categories.json",)
 
     def test_get_categories_if_requesterror(self, monkeypatch):
         class MockRequestResponseWithError:
@@ -36,59 +36,61 @@ class TestCommands:
         def mockreturn(*args, **kwargs):
             return MockRequestResponseWithError
 
-        monkeypatch.setattr('requests.get', mockreturn)
+        monkeypatch.setattr("requests.get", mockreturn)
 
         assert self.d.get_categories(2) is None
-        assert self.d.get_categories('gateaux') is None
+        assert self.d.get_categories("gateaux") is None
 
-    # def test_get_aliments(self, monkeypatch):
-    #     category = ['Category_1']
-    #     aliments = {'Category_1': [{'products': [{'product_name_fr': 'Ali_1'},
-    #                                              {'product_name_fr': 'Ali_2'}]}]}
-    #
-    #     class MockRequestResponse:
-    #         status_code = 200
-    #
-    #         @staticmethod
-    #         def json():
-    #             aliment = [[i for i in aliments[x]] for x in aliments.keys()]
-    #             return {'products': [{'product_name_fr': ali} for ali in aliment]}
-    #
-    #             # return {
-    #             #     'products': [{'product_name_fr': ali} for x, ali in aliment]
-    #             # }
-    #
-    #     def mockreturn(*args, **kwargs):
-    #         return MockRequestResponse
-    #
-    #     monkeypatch.setattr('requests.get', mockreturn)
-    #
-    #     assert self.d.get_aliments(category) == aliments
-    #
-    # def test_cleaned_data(self, monkeypatch):
-    #     # aliments = ...
-    #     pass
-    #
-    # @pytest.mark.django_db
-    # def test_insert_data(self, monkeypatch):
-    #     pass
+    def test_get_aliments(self, monkeypatch):
+        category = ["Category_1"]
+        aliments = {"Category_1": [{"products": [{"product_name_fr": "Ali_1"},
+                                                 {"product_name_fr": "Ali_2"}]}]}
+
+        class MockRequestResponse:
+            status_code = 200
+
+            @staticmethod
+            def json():
+                return {"products": [{"product_name_fr": "Ali_1"},
+                                     {"product_name_fr": "Ali_2"}]}
+
+        def mockreturn(*args, **kwargs):
+            return MockRequestResponse
+
+        monkeypatch.setattr("requests.get", mockreturn)
+
+        assert self.d.get_aliments(category) == aliments
+
+    def test_cleaned_data(self):
+        lst_data = [["476546754", "Ali_1", "e", "image_url", "sm_img_url", "url", "nutri_url"]]
+        aliments = [{"products": [{"code": "476546754",
+                                   "product_name_fr": "Ali_1",
+                                   "nutriscore_grade": "e",
+                                   "image_url": "image_url",
+                                   "image_small_url": "sm_img_url",
+                                   "url": "url",
+                                   "image_nutrition_url": "nutri_url"}]
+                     }]
+
+        assert self.d.cleaned_data(aliments) == lst_data
+
+    @pytest.mark.django_db
+    def test_insert_data(self, monkeypatch):
+        pass
 
     # def test_get_categories_with_error(self, monkeypatch):
     #     categories = []
-    #
+    # 
     #     class MockRequestResponseWith404:
     #         status_code = 404
-    #
+    # 
     #         def json(self):
     #             pass
-    #
+    # 
     #     def mockreturn(*args):
-    #         mockreturn.params = {'args': args}
+    #         mockreturn.params = {"args": args}
     #         return MockRequestResponseWith404
-    #
-    #     monkeypatch.setattr('requests.get', mockreturn)
-    #
-    #     with pytest.raises(AssertionError):
-    #         self.d.get_categories(2)
-
-    # assert self.d.get_categories(2) == categories
+    # 
+    #     monkeypatch.setattr("requests.get", mockreturn)
+    # 
+    #     assert self.d.get_categories(2) is None
