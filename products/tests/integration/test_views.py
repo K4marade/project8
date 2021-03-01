@@ -18,7 +18,7 @@ class TestViews(TestCase):  # (TestCase)
         # mixer.blend(Product)
         # cls.factory = RequestFactory()
 
-    def test_search_list(self):
+    def test_search_list_view(self):
         response_with_input = self.c.get('/products/search_list/', {'search': "nutella"})
         response_without_input = self.c.get('/products/search_list/', {'search': ""})
         # response = self.c.get(reverse('search'))
@@ -27,15 +27,8 @@ class TestViews(TestCase):  # (TestCase)
         assert response_with_input.context['search'] == "nutella"
         assert response_without_input.status_code == 200
 
-    def test_search_list_404(self):
-        response = self.c.get('/proucts/search_list')
-        assert response.status_code == 404
-
-    # @pytest.mark.parametrize('param', [
-    #     'results',
-    #     'detail'
-    # ])
-    # def test_render_views(self, client, param):
-    #     temp_url = reverse(param)
-    #     response = client.get(temp_url)
+    # def test_results_view(self):
+    #     mixer.blend(Product, id=75, name="Nutella")
+    #     result_url = reverse('results', kwargs={'id': 75})
+    #     response = self.c.get('/products/results/75')
     #     assert response.status_code == 200
