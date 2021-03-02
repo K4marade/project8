@@ -15,9 +15,7 @@ def search_list_view(request):
         return render(request, 'home.html', locals())
 
     elif search:
-        print(search)
         products = Product.objects.filter(name__icontains=search).order_by('nutriscore').distinct()
-        print(request)
         return render(request, 'search_list.html', locals())
 
 
