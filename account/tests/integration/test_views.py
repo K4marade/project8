@@ -10,6 +10,7 @@ class TestViews(TestCase):
         self.user = get_user_model()
         self.c = Client()
 
+
     def test_register_view(self):
         # Assert no user is registered yet
         assert self.user.objects.count() == 0
