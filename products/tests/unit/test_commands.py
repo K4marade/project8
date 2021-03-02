@@ -1,5 +1,3 @@
-import pytest
-import requests
 from products.management.commands.db_init import Database
 
 
@@ -33,10 +31,13 @@ class TestCommands:
         monkeypatch.setattr("requests.get", mockreturn)
 
         assert self.d.get_categories(2) == categories
-        assert mockreturn.params["args"] == ("https://fr.openfoodfacts.org/categories.json",)
+        assert mockreturn.params["args"] == (
+            "https://fr.openfoodfacts.org/categories.json",
+        )
 
     def test_get_categories_if_requesterror(self, monkeypatch):
-        """Tests the return result if an error occurs with the OFF API"""
+        """Tests the return result if an error occurs
+        with the OFF API"""
 
         class MockRequestResponseWithError:
             status_code = 404
@@ -54,8 +55,10 @@ class TestCommands:
         from Open Food Facts' by mocking the result of the API call"""
 
         category = ["Category_1"]
-        aliments = {"Category_1": [{"products": [{"product_name_fr": "Ali_1"},
-                                                 {"product_name_fr": "Ali_2"}]}]}
+        aliments = {"Category_1": [{"products": [
+            {"product_name_fr": "Ali_1"},
+            {"product_name_fr": "Ali_2"}
+        ]}]}
 
         class MockRequestResponse:
             status_code = 200
@@ -73,9 +76,11 @@ class TestCommands:
         assert self.d.get_aliments(category) == aliments
 
     def test_cleaned_data(self):
-        """Tests the result of the returned list with only useful product info"""
+        """Tests the result of the returned list
+        with only useful product info"""
 
-        lst_data = [["476546754", "Ali_1", "e", "image_url", "sm_img_url", "url", "nutri_url"]]
+        lst_data = [["476546754", "Ali_1", "e", "image_url",
+                     "sm_img_url", "url", "nutri_url"]]
         aliments = [{"products": [{"code": "476546754",
                                    "product_name_fr": "Ali_1",
                                    "nutriscore_grade": "e",
@@ -93,17 +98,15 @@ class TestCommands:
 
     # def test_get_categories_with_error(self, monkeypatch):
     #     categories = []
-    # 
     #     class MockRequestResponseWith404:
     #         status_code = 404
-    # 
+
     #         def json(self):
     #             pass
-    # 
+
     #     def mockreturn(*args):
     #         mockreturn.params = {"args": args}
     #         return MockRequestResponseWith404
-    # 
+
     #     monkeypatch.setattr("requests.get", mockreturn)
-    # 
     #     assert self.d.get_categories(2) is None

@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -17,7 +16,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True,
+                                        serialize=False,
+                                        verbose_name='ID')),
                 ('barcode', models.BigIntegerField()),
                 ('name', models.CharField(max_length=250)),
                 ('nutriscore', models.CharField(max_length=1)),
@@ -29,18 +31,37 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True,
+                                        serialize=False,
+                                        verbose_name='ID')),
                 ('name', models.CharField(max_length=250)),
-                ('products', models.ManyToManyField(db_table='assoc_cat_ali', related_name='categories', to='products.Product')),
+                ('products', models.ManyToManyField(db_table='assoc_cat_ali',
+                                                    related_name='categories',
+                                                    to='products.Product')),
             ],
         ),
         migrations.CreateModel(
             name='Favorite',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ali_source', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ali_source', to='products.product')),
-                ('ali_sub', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ali_sub', to='products.product')),
-                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True,
+                                        serialize=False,
+                                        verbose_name='ID')),
+                ('ali_source', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='ali_source',
+                    to='products.product'
+                )),
+                ('ali_sub', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='ali_sub',
+                    to='products.product'
+                )),
+                ('user_id', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to=settings.AUTH_USER_MODEL
+                )),
             ],
             options={
                 'unique_together': {('ali_source', 'ali_sub')},

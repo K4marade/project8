@@ -22,8 +22,10 @@ class TestViews(TestCase):
     def test_search_list_view(self):
         """Test the search list view"""
 
-        response_with_input = self.c.get("/products/search_list/", {"search": "nutella"})
-        response_without_input = self.c.get("/products/search_list/", {"search": ""})
+        response_with_input = self.c.get("/products/search_list/",
+                                         {"search": "nutella"})
+        response_without_input = self.c.get("/products/search_list/",
+                                            {"search": ""})
 
         assert response_with_input.status_code == 200
         assert response_with_input.context["search"] == "nutella"
@@ -49,7 +51,8 @@ class TestViews(TestCase):
         # Assert no products are saved yet in database
         assert Favorite.objects.count() == 0
 
-        save_url = reverse("save", kwargs={"product_id": 1, "substitute_id": 2})
+        save_url = reverse("save", kwargs={"product_id": 1,
+                                           "substitute_id": 2})
         response = self.c.get(save_url)
 
         # Assert user stays on the results page when a product is saved
@@ -73,7 +76,8 @@ class TestViews(TestCase):
     def test_unauthenticated_save_product_view(self):
         """Test the save product view if user is unauthenticated"""
 
-        save_url = reverse("save", kwargs={"product_id": 1, "substitute_id": 2})
+        save_url = reverse("save", kwargs={"product_id": 1,
+                                           "substitute_id": 2})
         response = self.c.get(save_url)
 
         # Assert user is redirected to login page

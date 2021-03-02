@@ -1,7 +1,6 @@
 from django.urls import reverse
 from django.test import Client, TestCase
 from django.contrib.auth import get_user_model
-import pytest
 
 
 class TestViews(TestCase):
@@ -55,10 +54,13 @@ class TestViews(TestCase):
         assert response.url == reverse("home")
 
         # Incorrect password:
-        response_with_wrong_password = self.c.post(login_url, {"username": "Leonard",
-                                                               "password": "wrong_password"})
+        response_with_wrong_password = self.c.post(
+            login_url, {"username": "Leonard",
+                        "password": "wrong_password"}
+        )
         assert response_with_wrong_password.status_code == 200
-        assert b"Your username and password didn\'t match" in response_with_wrong_password.content
+        assert b"Your username and password didn\'t match" in \
+               response_with_wrong_password.content
 
     def test_logout_view(self):
         """Tests the account logout view"""

@@ -1,16 +1,9 @@
-from django.contrib.auth.models import User
-from django.shortcuts import redirect
 from django.test import Client
-from mixer.backend.django import mixer
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.contrib.auth import get_user_model
-from products.models import Product
 from django.urls import reverse
-import selenium.webdriver.support.ui as ui
 import time
-import pytest
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--headless")
@@ -34,7 +27,8 @@ class ChromeFunctionalTestCase(StaticLiveServerTestCase):
         self.driver.close()
 
     def get_element(self, selector):
-        """Method that uses a css selector to return an element from the driver."""
+        """Method that uses a css selector to return
+        an element from the driver."""
 
         return self.driver.find_element_by_css_selector(selector)
 
@@ -58,7 +52,8 @@ class ChromeFunctionalTestCase(StaticLiveServerTestCase):
         time.sleep(1)
 
         # Assert the current url is the login url
-        assert self.driver.current_url == self.live_server_url + reverse('login') + "?next=/"
+        assert self.driver.current_url == self.live_server_url + reverse(
+            'login') + "?next=/"
 
         self.get_element("#id_username").send_keys("LeonardCOLIN")
         self.get_element("#id_password").send_keys("1234Testing!")
@@ -67,7 +62,8 @@ class ChromeFunctionalTestCase(StaticLiveServerTestCase):
         time.sleep(3)
 
         # Assert the current url is the home url
-        assert self.driver.current_url == self.live_server_url + reverse("home")
+        assert self.driver.current_url == self.live_server_url + \
+               reverse("home")
         # Assert the profile link is available once user is authenticated
         assert "button-profile" in self.driver.page_source
 
@@ -91,7 +87,8 @@ class ChromeFunctionalTestCase(StaticLiveServerTestCase):
         self.get_element("#button-register").click()
 
         # Assert the current url is the login url
-        assert self.driver.current_url == self.live_server_url + reverse('register') + "?next=/"
+        assert self.driver.current_url == self.live_server_url + reverse(
+            'register') + "?next=/"
         time.sleep(2)
 
         self.get_element("#id_username").send_keys("Leonard")

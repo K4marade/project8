@@ -1,10 +1,9 @@
 from django.core.management.base import BaseCommand
 from products.models import Product, Category
 from django.db import transaction, DatabaseError
-from django.conf import settings
 import requests
-import os
-import json
+# import os
+# import json
 
 
 class Database:
@@ -28,7 +27,8 @@ class Database:
     #     for category in data:
     #         categories.append(category['name'])
     #
-    #     f = open(os.path.join(settings.BASE_DIR, 'api_data_files/of_api_cat.json'), "w")
+    #     f = open(os.path.join(settings.BASE_DIR,
+    #     'api_data_files/of_api_cat.json'), "w")
     #     f.write(str(categories_data.text))
     #     f.close()
     #
@@ -40,8 +40,12 @@ class Database:
     #             "tag_0": str(cat),
     #             "json": "true"
     #         }
-    #         ret_aliments = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
-    #         f = open(os.path.join(settings.BASE_DIR, "api_data_files/of_api_ali" + str(cat) + ".json"), "w")
+    #         ret_aliments = requests.get(
+    #         "https://fr.openfoodfacts.org/cgi/search.pl?", params=payload
+    #         )
+    #         f = open(os.path.join(settings.BASE_DIR,
+    #         "api_data_files/of_api_ali" + str(cat) + ".json"),
+    #         "w")
     #         f.write(str(ret_aliments.text))
     #         f.close()
     #
@@ -49,7 +53,8 @@ class Database:
     # def get_categories(quantity):
     #     """Method that gets categories from Open Food Facts' API"""
     #     categories = []
-    #     with open(os.path.join(settings.BASE_DIR, "api_data_files/of_api_cat.json"), "r") as file:
+    #     with open(os.path.join(settings.BASE_DIR,
+    #     "api_data_files/of_api_cat.json"), "r") as file:
     #         file = file.read()
     #
     #     data = json.loads(file)
@@ -109,7 +114,9 @@ class Database:
                 "tag_0": str(cat),
                 "json": "true"
             }
-            ret_aliments = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
+            ret_aliments = requests.get(
+                "https://fr.openfoodfacts.org/cgi/search.pl?", params=payload
+            )
             if ret_aliments.status_code == 200:
                 ret_aliments = ret_aliments.json()
                 aliments[cat].append(ret_aliments)
@@ -135,7 +142,7 @@ class Database:
                 if not all(tag in products for tag in valid_tag):
                     pass
                 else:
-                    if products['product_name_fr'] != '':  # make sure each product has a name
+                    if products['product_name_fr'] != '':
                         data = [products['code'],
                                 products['product_name_fr'],
                                 products['nutriscore_grade'],
@@ -165,7 +172,8 @@ class Database:
                 category = Category(name=cat)
                 category.save()
 
-            # insert products in database with a many to many relationship with categories
+            # insert products in database with a many to many
+            # relationship with categories
             for cat, elements in aliments.items():
                 category = Category.objects.get(name=cat)
                 for data in elements:
@@ -195,16 +203,20 @@ class Command(BaseCommand):
                     #######################################
                     ### If you wish to refresh OFF data ###
                     #######################################
-                    # self.stdout.write(self.style.WARNING("Refreshing data, please wait..."))
+                    # self.stdout.write(self.style.WARNING(
+                    # "Refreshing data, please wait..."))
                     # db.refresh_data()
-                    # self.stdout.write(self.style.SUCCESS("Data refreshed"))
+                    # self.stdout.write(self.style.SUCCESS(
+                    # "Data refreshed"))
                     #######################################
                     ### If you wish to refresh OFF data ###
                     #######################################
 
-                    self.stdout.write(self.style.WARNING("Inserting data into DB..."))
+                    self.stdout.write(self.style.WARNING(
+                        "Inserting data into DB..."))
                     db.insert_data()
-                    self.stdout.write(self.style.SUCCESS("Data inserted successfully !"))
+                    self.stdout.write(self.style.SUCCESS(
+                        "Data inserted successfully !"))
 
             except DatabaseError:
                 self.stderr.write(self.style.ERROR('Failed to insert data.'))
