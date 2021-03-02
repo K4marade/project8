@@ -5,17 +5,23 @@ import pytest
 
 
 class TestViews(TestCase):
+    """Class that tests account views"""
 
     def setUp(self) -> None:
+        """Method that sets tests parameters"""
+
         self.user = get_user_model()
         self.c = Client()
 
+    def test_user_register_view(self):
+        """Tests the account register view"""
 
-    def test_register_view(self):
         # Assert no user is registered yet
         assert self.user.objects.count() == 0
+
         register_url = reverse('register')
         assert self.c.get(register_url).status_code == 200
+
         response = self.c.post(register_url, {
             "username": "Leonard",
             "email": "leo@leo.com",
@@ -31,6 +37,8 @@ class TestViews(TestCase):
         assert response.url == reverse('home')
 
     def test_user_login_view(self):
+        """Tests the account login view with success and fail"""
+
         self.user.objects.create_user(username="Leonard",
                                       email="leo@leo.com",
                                       password="12345Testing")
@@ -53,6 +61,8 @@ class TestViews(TestCase):
         assert b"Your username and password didn\'t match" in response_with_wrong_password.content
 
     def test_logout_view(self):
+        """Tests the account logout view"""
+
         logout_url = reverse("logout")
         response = self.c.get(logout_url)
 
@@ -61,6 +71,8 @@ class TestViews(TestCase):
         assert response.url == reverse("home")
 
     def test_profile_view(self):
+        """Tests the account profile view"""
+
         self.user.objects.create_user(username="Leonard",
                                       email="leo@leo.com",
                                       password="12345Testing")
@@ -71,6 +83,8 @@ class TestViews(TestCase):
         assert response.status_code == 200
 
     def test_favorite_view(self):
+        """Tests the account favorite view"""
+
         self.user.objects.create_user(username="Leonard",
                                       email="leo@leo.com",
                                       password="12345Testing")

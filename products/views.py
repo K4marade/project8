@@ -1,12 +1,20 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from products.models import Product, Favorite
-from django.contrib.auth.decorators import login_required
 from account.models import UserAuth
 from django.db import IntegrityError
 
 
 def search_list_view(request):
+    """
+    Function that displays the search list page with
+    found aliments from user input search or
+    redirects the user to home page if invalid input
+
+     **Template:**
+    :template:`home.html` and :template:`search_list.html`
+    """
+
     search = request.GET.get('search')
 
     if not search.strip():
@@ -20,6 +28,13 @@ def search_list_view(request):
 
 
 def results_view(request, product_id):
+    """
+    Function that displays the results page with found substitutes
+
+     **Template:**
+    :template:`results.html`
+    """
+
     prod_title = Product.objects.get(id=product_id).name
     prod_image = Product.objects.get(id=product_id).small_image
     substitutes = Product.objects.filter(categories__products__id=product_id).order_by('nutriscore').exclude(
@@ -28,6 +43,15 @@ def results_view(request, product_id):
 
 
 def save_product_view(request, product_id, substitute_id):
+    """
+    Function that stores saved aliment in favorite from user session,
+    or display an error message if aliment already saved,
+    or redirect to login if user is not authenticated
+
+     **Template:**
+    :template:`results.html` and :template:`login.html`
+    """
+
     if request.user.is_authenticated:
         current_user = UserAuth.objects.get(id=request.session['_auth_user_id'])
         product = Product.objects.get(id=product_id).id
@@ -45,5 +69,12 @@ def save_product_view(request, product_id, substitute_id):
 
 
 def detail_view(request, product_id):
+    """
+    Fucntion that displays detail page for a product
+
+     **Template:**
+    :template:`detail.html`
+    """
+
     product = Product.objects.get(id=product_id)
     return render(request, 'detail.html', locals())

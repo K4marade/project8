@@ -147,6 +147,11 @@ class Database:
             return lst_data
 
     def insert_data(self):
+        """
+        Method that insert categories and aliments into
+        database with a many to many relationship
+        """
+
         with transaction.atomic():
             categories = self.get_categories(30)
             aliments = self.get_aliments(categories)

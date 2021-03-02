@@ -8,15 +8,20 @@ import pytest
 
 
 class TestViews(TestCase):
+    """Class that tests products views"""
 
     @pytest.mark.django_db
     def setUp(self) -> None:
+        """Method that sets tests parameters"""
+
         self.user = get_user_model()
         self.c = Client()
         self.product = mixer.blend(Product, id=1)
         self.substitute = mixer.blend(Product, id=2)
 
     def test_search_list_view(self):
+        """Test the search list view"""
+
         response_with_input = self.c.get("/products/search_list/", {"search": "nutella"})
         response_without_input = self.c.get("/products/search_list/", {"search": ""})
 
@@ -26,12 +31,16 @@ class TestViews(TestCase):
 
     @pytest.mark.django_db
     def test_results_view(self):
+        """Tests the results view"""
+
         results_url = reverse("results", kwargs={"product_id": 1})
         response = self.c.get(results_url)
         assert response.status_code == 200
 
     @pytest.mark.django_db
     def test_authenticated_save_product_view(self):
+        """Tests the save product view if user is authenticated"""
+
         self.user.objects.create_user(username="test_username",
                                       email="test_email@test.com",
                                       password="test_password!")
@@ -62,6 +71,8 @@ class TestViews(TestCase):
 
     @pytest.mark.django_db
     def test_unauthenticated_save_product_view(self):
+        """Test the save product view if user is unauthenticated"""
+
         save_url = reverse("save", kwargs={"product_id": 1, "substitute_id": 2})
         response = self.c.get(save_url)
 
@@ -70,6 +81,8 @@ class TestViews(TestCase):
         assert response.url == reverse('login')
 
     def test_detail_view(self):
+        """Test the detail view"""
+
         detail_url = reverse("detail", kwargs={"product_id": 1})
         response = self.c.get(detail_url)
 

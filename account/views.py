@@ -6,12 +6,24 @@ from .forms import RegisterForm
 from .decorators import unauthenticated_user
 from products.models import Product
 from account.models import UserAuth
-from django.contrib.auth.views import LoginView
-from django.contrib.messages.views import SuccessMessageMixin
 
 
 @unauthenticated_user
 def register_view(request):
+    """
+    GET method:
+    Displays the register page
+
+     **Template:**
+    :template:`registration/register.html`
+
+    POST method:
+    Redirects to home page
+
+     **Template:**
+     :template: `home/home.html`
+    """
+
     if request.method == "GET":
         form = RegisterForm()
         return render(request, 'registration/register.html', locals())
@@ -36,6 +48,13 @@ def register_view(request):
 
 
 def logout_view(request):
+    """
+    Disconnect the user and redirect to the home-page
+
+     **Template:**
+    :template:`home/home.html`
+
+    """
     logout(request)
     messages.info(request, "Vous êtes bien déconnecté")
     return redirect('home')
@@ -43,11 +62,26 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
+    """
+    Display the user profile page is user is authenticated
+
+    **Template:**
+    :template:`account/profile.html`
+    """
+
     return render(request, 'account/profile.html', locals())
 
 
 @login_required
 def favorite_view(request):
+    """
+    Display the favorite page if user is authenticated
+
+    **Template:**
+    :template:`account/favorite.html`
+
+    """
+
     current_user = UserAuth.objects.get(id=request.session['_auth_user_id'])
     favorites = Product.objects.filter(ali_sub__user_id=current_user)
     return render(request, 'account/favorite.html', {'favorites': favorites})

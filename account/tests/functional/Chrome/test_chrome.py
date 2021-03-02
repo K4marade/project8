@@ -18,20 +18,34 @@ chrome_options.add_argument("--window-size=1920,1200")
 
 
 class ChromeFunctionalTestCase(StaticLiveServerTestCase):
+    """Class that defines Chrome functional tests"""
 
     def setUp(self):
+        """Tests setup method"""
+
         self.driver = webdriver.Chrome(options=chrome_options, )
         self.driver.maximize_window()
         self.user = get_user_model()
         self.client = Client()
 
     def tearDown(self):
+        """Tests tear down method"""
+
         self.driver.close()
 
     def get_element(self, selector):
+        """Method that uses a css selector to return an element from the driver."""
+
         return self.driver.find_element_by_css_selector(selector)
 
     def test_user_can_connect_and_disconnect(self):
+        """
+        Test user is on the homepage and :
+            - clicks on the login button
+            - inputs its connexion info and clicks on "connexion" button
+            - clicks on the logout button from the homepage and is disconnected
+        """
+
         self.user.objects.create_user(
             username="LeonardCOLIN", password="1234Testing!"
         )
@@ -64,6 +78,13 @@ class ChromeFunctionalTestCase(StaticLiveServerTestCase):
         assert "Vous êtes bien déconnecté" in self.driver.page_source
 
     def test_user_can_register(self):
+        """
+        Test user is on the homepage and:
+            - clicks on the register button
+            - inputs its username, email and password
+            - clicks on the "validate" button and is now registered
+        """
+
         self.driver.get(self.live_server_url)
 
         # User is on the homepage and clicks on the register button

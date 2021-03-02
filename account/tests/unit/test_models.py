@@ -5,8 +5,11 @@ from account.models import UserAuth
 
 @pytest.mark.django_db
 class TestModels:
+    """Class that tests account models"""
 
     def test_user_auth(self):
-        user = mixer.blend(UserAuth, username='test user', nutriscore='a')
+        """Test a new user is in database"""
+
+        user = mixer.blend(UserAuth, username='test user')
         assert user.username == 'test user'
         assert UserAuth.objects.filter(username='test user').exists() is True
