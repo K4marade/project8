@@ -35,7 +35,7 @@ def register_view(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            messages.success(request, "Bonjour " + username + " !")
+            messages.success(request, "Bienvenue " + username + " !")
             return redirect('home')
 
     return render(request, 'registration/register.html', locals())
