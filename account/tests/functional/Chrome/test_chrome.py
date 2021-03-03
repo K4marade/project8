@@ -98,4 +98,4 @@ class ChromeFunctionalTestCase(StaticLiveServerTestCase):
         time.sleep(2)
         self.get_element("#button-validate").click()
         time.sleep(1)
-        assert "Bonjour Leonard" in self.driver.page_source
+        assert "Bienvenue Leonard" in self.driver.page_source
