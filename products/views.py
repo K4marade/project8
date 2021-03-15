@@ -16,16 +16,18 @@ def search_list_view(request):
     """
 
     search = request.GET.get('search')
+    try:
+        if not search.strip():
+            message = messages.error(
+                request, "Merci de rentrer une recherche valide")
+            return render(request, 'home.html', locals())
 
-    if not search.strip():
-        message = messages.error(
-            request, "Merci de rentrer une recherche valide")
-        return render(request, 'home.html', locals())
-
-    elif search:
-        products = Product.objects.filter(name__icontains=search).order_by(
-            'nutriscore').distinct()
-        return render(request, 'search_list.html', locals())
+        elif search:
+            products = Product.objects.filter(name__icontains=search).order_by(
+                'nutriscore').distinct()
+            return render(request, 'search_list.html', locals())
+    except AttributeError:
+        return redirect('home')
 
 
 def results_view(request, product_id):
